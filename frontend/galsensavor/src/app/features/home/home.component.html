@@ -1,0 +1,40 @@
+<div class="hero-section">
+  <img src = "https://gsmenuitems.blob.core.windows.net/menu-items-images/welcomePage.jpg" alt="Goree Island" class="hero-image">
+   
+    <div class="overlay">
+      <div class = "overlay-content">
+      <h1>Welcome to Galsen Savor</h1>
+      <p>Experience Authentic Senegalese Cuisine</p>
+      <button mat-flat-button class="cta-button" routerLink="/menu">Explore Our Menu</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="about-section">
+    <div class="about-text">
+      <h2>About Us</h2>
+      <p>{{about}}</p>
+    </div>
+  </div>
+  
+  <div class="featured-dishes" *ngIf = "popularDishes.length">
+    <h2>Our Popular Dishes</h2>
+    <div class="dish-grid">
+      <mat-card *ngFor="let dish of popularDishes" class="dish-card" >
+        <img mat-card-image [src]="dish.imageUrl" alt="{{dish.name}}">
+        <mat-card-title>{{dish.name}}</mat-card-title>
+        <mat-card-content>
+          <p>{{dish.description}}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  
+  <div class="testimonial-section">
+    <h2>Our Customers Reviews</h2>
+    <mat-card class="testimonial-card" *ngFor="let testimonial of testimonials">
+      <mat-card-content>
+         <p>{{testimonial.testimonial}} - {{testimonial.name}}</p>
+         </mat-card-content>
+    </mat-card>
+  </div>

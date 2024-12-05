@@ -1,0 +1,63 @@
+<div class="cart">
+    <h2>Cart</h2>
+
+    @if(isLoading) { 
+        <div class="spinner-overlay">
+            <mat-spinner></mat-spinner>
+        </div>
+    }
+
+    @if(emptyCart) {
+        <div class="cart-empty">
+            <p>Your Cart is empty, aren't you hungry? <p>
+            <a routerLink="/menu">Browse our Menu!</a>
+        </div>   
+    } @else {
+     <div>
+        <div class="titles">
+            <h3>Menu-Item</h3>
+            <h3>Price</h3>
+            <h3>Quantity</h3>
+            <h3 class="total">Total</h3>
+        </div>
+        
+        <div class="cart-items">
+            @for(cartItem of cartItems; track cartItem.menuItem.id){
+                <div class="cart-item">
+                    <div class="cart-menu">
+                        <img [src]="cartItem.menuItem.imageUrl" alt="{{cartItem.menuItem.name}}">
+                        <div>
+                            <h3>{{cartItem.menuItem.name}}</h3>
+                            <button mat-button (click)="removeItem(cartItem.menuItem.id)">Remove</button>
+                        </div>
+                    </div>
+                    <div class="cart-menu-price">{{cartItem.menuItem.price | currency}}</div>
+                    <div class="cart-menu-quantity">
+                        <button mat-mini-fab class = "decrease" (click)="decreaseQuantity(cartItem.menuItem.id)">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                       <div class="count">{{cartItem.quantity}}</div> 
+                       <button mat-mini-fab class="increase" (click)="increaseQuantity(cartItem.menuItem.id)">
+                            <mat-icon>add</mat-icon>
+                       </button>
+                    </div>
+                    <div class="cart-menu-total-price">
+                        {{cartItem.cartItemTotal | currency}}
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="cart-summary">
+            <button class="clear-cart" mat-fab extended (click)="clearCart()">Clear Cart</button>
+            <div class="cart-order">
+                <div class="subtotal">
+                   <span>Subtotal</span> 
+                   <span class="amount">{{cartTotal | currency}}</span>
+                </div>
+                <button mat-flat-button [disabled]="isSubmitting" (click)="placeOrder()">Place Order</button>
+
+            </div>
+        </div>
+    </div>
+    }
+</div>

@@ -1,0 +1,21 @@
+<mat-toolbar>
+    <mat-toolbar-row fxLayout="row">
+        <span>Confirmation</span>
+        <span class="spacer"></span>
+    </mat-toolbar-row>
+</mat-toolbar>
+ 
+<mat-dialog-content class="mat-typography">
+    <h6>Do you want to {{details.message}}</h6>
+</mat-dialog-content>
+ 
+<mat-dialog-actions align="end">
+    <button mat-raised-button (click)="handleChangeAction()">
+        <mat-icon>check_cirlce</mat-icon>Yes
+    </button>
+ 
+    <button mat-raised-button mat-dialog-close="">
+        <mat-icon>cancel</mat-icon>No
+    </button>
+ 
+</mat-dialog-actions>

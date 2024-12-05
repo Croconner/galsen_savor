@@ -1,0 +1,17 @@
+<div class = "dialog">
+
+    <h2 mat-dialog-title>{{data.menuItem.name}}</h2>
+    <mat-dialog-content>
+        <div class ="image-container">
+            <img [src]="data.menuItem.imageUrl" alt="{{ data.menuItem.name }}" mat-card-xl-image>
+        </div>
+        <p>{{ data.menuItem.description }}</p>
+        <p><strong>Price:</strong> {{ data.menuItem.price | currency }}</p>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        @if (data.isLoggedIn) {
+            <button mat-raised-button color="primary" mat-dialog-close (click) = "addToCart(data.menuItem)"> Add to cart</button>
+        }
+    </mat-dialog-actions>
+</div>

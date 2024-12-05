@@ -1,0 +1,77 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span>{{dialogData.action}} Menu-Item</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-dialog-content class="mat-typography">
+  <div class="spinner-overlay" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div>
+      <div>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" required>
+          <mat-error *ngIf="productForm.controls.name.touched && productForm.controls.name.invalid">
+            <span *ngIf="productForm.controls.name.errors.required">This field is mandatory.</span>
+            <span *ngIf="productForm.controls.name.errors.pattern">This field is invalid.</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Price</mat-label>
+          <input matInput formControlName="price" type="number" class="right-align" required>
+          <span matTextPrefix>$&nbsp;</span>
+          <span matTextSuffix>.00</span>
+          <mat-error *ngIf="productForm.controls.price.touched && productForm.controls.price.invalid">
+            <span *ngIf="productForm.controls.price.errors.required">This field is mandatory.</span>
+            <span *ngIf="productForm.controls.price.errors.pattern">This field is invalid.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="category">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="category" required>
+            <mat-option *ngFor="let category of categories" [value]="category.name">
+              {{category.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Description</mat-label>
+          <input matInput formControlName="description" required>
+          <mat-error *ngIf="productForm.controls.description.touched && productForm.controls.description.invalid">
+            <span *ngIf="productForm.controls.description.errors.required">This field is mandatory.</span>
+            <span *ngIf="productForm.controls.description.errors.pattern">This field is invalid.</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="dialogAction === 'Add'">
+        <label for="fileInput">Image</label>
+        <input id="fileInput" type="file" (change)="onFileSelect($event)">
+        <mat-error *ngIf="!selectedFile">
+          <span>This field is mandatory.</span>
+        </mat-error>
+      </div>
+
+    </div>
+    <mat-dialog-actions align="end">
+      <button mat-raised-button  [disabled]="productForm.invalid || (dialogAction === 'Add' && !selectedFile) || (dialogAction === 'Edit' && isFormUpdated())" 
+      type="submit" class="save">
+        <mat-icon>save</mat-icon> {{action}}
+      </button>
+      <button mat-raised-button  mat-dialog-close><mat-icon>cancel</mat-icon>Close</button>
+    </mat-dialog-actions>
+  </form>
+</mat-dialog-content>
+
+
+

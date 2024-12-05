@@ -1,0 +1,60 @@
+<mat-card class="centerForm"> 
+   
+  <mat-card-header class="header">
+    <mat-card-title>Create Account</mat-card-title>
+  </mat-card-header>
+    <mat-card-content>
+      <div class="spinner-overlay" *ngIf="isLoading"> 
+        <mat-spinner>
+        </mat-spinner>
+
+      </div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-grid">
+        <div>
+           <mat-form-field class="full-width" appearance="outline">
+          <mat-label> First Name</mat-label>
+          <input matInput formControlName="firstName" required>
+          <mat-error *ngIf="!form.controls['firstName'].valid">
+            First Name is required
+          </mat-error>
+        </mat-form-field>
+        </div>
+     
+        <div>
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label> Last Name</mat-label>
+          <input matInput formControlName="lastName" required>
+          <mat-error *ngIf="!form.controls['lastName'].valid">
+            Last Name is required
+          </mat-error>
+        </mat-form-field></div>
+ 
+        <div class="emailInput">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput placeholder="Enter email address" required />
+            <mat-error *ngIf="form.controls['email'].hasError('required') || form.controls['email'].hasError('email')">
+                Valid Email is required
+              </mat-error>
+              <mat-error *ngIf="form.controls['email'].hasError('emailFound')">
+                Email already Exists!
+              </mat-error>
+          </mat-form-field>
+        </div>
+ 
+        <div>
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password" required>
+            <mat-error *ngIf="!form.controls['password'].valid">
+            Password is required and minimun lenght is 8.
+          </mat-error>
+        </mat-form-field>
+        </div>
+      </div>
+        <button mat-flat-button color ="primary" [disabled]="form.invalid || isLoading" type="submit" >Sign Up</button>
+      </form>
+
+    </mat-card-content>
+  </mat-card>

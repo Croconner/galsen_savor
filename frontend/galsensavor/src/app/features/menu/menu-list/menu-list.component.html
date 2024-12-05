@@ -1,0 +1,38 @@
+
+<div class="dishes">
+    
+    <mat-card class="menu-intro">
+        <mat-card-content>
+            @if(firstName) {
+                <span>Hi {{firstName}},</span>
+            }
+            <p>{{menuIntro}}</p>
+            @if(!isLoggedIn) {
+                 <button mat-fab extended routerLink="/login" class="cta-button">
+                     Login to Place Order
+                 </button>    
+             } 
+         </mat-card-content>   
+    </mat-card>
+
+    
+    <mat-tab-group class="filter">
+        @for (category of categories; track category.name) {
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon> {{category.icon}}</mat-icon>
+                    <span>{{category.name}}</span>
+                </ng-template>  
+                <div class="dish-grid">
+                    @for (item of menuByCategory(category.name); track item.id) {
+                        <mat-card class="dish-card"  (click) = "selectedMenuItem(item)">
+                            <img mat-card-xl-image [src]="item.imageUrl" alt="{{item.name}}">
+                            <mat-card-title>{{item.name}}</mat-card-title>
+                            <mat-card-subtitle>{{item.price | currency}}</mat-card-subtitle>
+                        </mat-card>
+                     }
+                </div>
+            </mat-tab>
+        }
+    </mat-tab-group>
+  </div>

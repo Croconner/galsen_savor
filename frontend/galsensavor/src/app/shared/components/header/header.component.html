@@ -1,0 +1,17 @@
+<mat-toolbar class="header mat-elevation-z3">
+    <span> Galsen Savor</span>
+    <span class="example-spacer"></span>
+      <a routerLink="/home">Home</a>
+      <a routerLink="/menu">Menu</a>
+      <a routerLink="/login" *ngIf="!isLoggedIn">Login</a>
+      <a routerLink="/signUp" *ngIf="!isLoggedIn">Sign Up</a>
+      <a routerLink="/profile" *ngIf="isLoggedIn">Profile</a>
+      <a mat-button routerLink="/order-history" *ngIf="isLoggedIn">Orders</a>
+      <a routerLink="/dashboard" *ngIf="isAdmin">Dashboard</a>
+      <a *ngIf="isLoggedIn" (click)="logout()">Logout</a>
+      <a routerLink="/cart" class="cart-icon" *ngIf="isLoggedIn">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-quantity">{{cartCount}}</span>
+      </a>
+  </mat-toolbar>
+  

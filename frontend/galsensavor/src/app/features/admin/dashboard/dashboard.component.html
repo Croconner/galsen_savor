@@ -1,0 +1,25 @@
+<div class="dashboard">
+
+    <mat-card class="intro">
+        <mat-card-header>
+            Dashboard
+         </mat-card-header>       
+    </mat-card>
+
+     <mat-tab-group>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon> menu_book</mat-icon>
+                <span>Manage Menu</span>
+            </ng-template> 
+             <app-manage-menu></app-manage-menu>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>shopping_cart</mat-icon>
+                <span>Manage Order</span>
+            </ng-template> 
+             <app-manage-order></app-manage-order>
+        </mat-tab>
+     </mat-tab-group>
+</div>

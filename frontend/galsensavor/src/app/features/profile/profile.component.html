@@ -1,0 +1,19 @@
+<mat-card class="centerForm">
+    <mat-card-header class ="header">
+       <mat-card-title>My Info</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+       <div>
+        <strong>First Name: </strong> {{firstName}}
+       </div>
+       <div>
+        <strong>Last Name: </strong> {{lastName}}
+       </div>
+       <div>
+        <strong>Email: </strong> {{email}}
+       </div>
+     
+       <button mat-raised-button color="primary" (click)="changePassword()">Change Password</button>
+    </mat-card-content>
+
+</mat-card>

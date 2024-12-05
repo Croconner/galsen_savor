@@ -1,0 +1,48 @@
+<mat-card class="centerForm"> 
+    <mat-card-header class="header">
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="spinner-overlay" *ngIf="isLoading">
+        <mat-spinner></mat-spinner>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-grid">
+        <div class="emailInput">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput placeholder="Enter email address" required />
+            <mat-error *ngIf="form.controls['email'].hasError('required') || form.controls['email'].hasError('email')">
+              Valid Email is required
+            </mat-error>
+            <mat-error *ngIf="form.controls['email'].hasError('emailNotFound')">
+              Email does not exist!
+            </mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div>
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input formControlName="password" matInput type="password" required>
+            <mat-error *ngIf="form.controls['password'].hasError('required') || 
+            form.controls['password'].hasError('minlength')">
+              Password is required
+            </mat-error>
+            <mat-error *ngIf="form.controls['password'].hasError('passwordMismatch')">
+              Password does not match!
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+        <button mat-flat-button color="primary" [disabled]="form.invalid || isLoading" type="submit">
+          Login
+        </button>
+      </form>
+  
+      <mat-error *ngIf="loginFailed">
+        An error occured, please try again! 
+      </mat-error>
+    </mat-card-content>
+  </mat-card>
+  

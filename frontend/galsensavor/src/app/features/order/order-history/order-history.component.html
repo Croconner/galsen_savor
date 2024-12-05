@@ -1,0 +1,33 @@
+<div class="order-history">
+    <h2>Your Order History</h2>
+    @if(emptyOrders) {
+        <div>
+            <p>Nothing to See. Hurry and Order. <p>
+            <a routerLink="/menu">Browse our Menu!</a>
+        </div>   
+    } @else {
+        <mat-accordion class="orders-list" multi>
+            <mat-expansion-panel  *ngFor="let order of orders" class="order mat-elevation-z3">
+
+                <mat-expansion-panel-header class="order-info">
+                    <mat-panel-title>{{ order.orderDate | date: 'MMM d, y - h:mm a'}} </mat-panel-title>
+                    <mat-panel-description> Total Amount: {{ order.totalAmount | currency }}</mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <div class="order-items">
+                    <h4>Menu Items:</h4>
+                    <div *ngFor="let item of order.orderLineItems" class="order-item">
+                        <span>{{ item.menuItem.name }} - {{ item.quantity }} x {{ item.menuItem.price | currency }}</span>
+                        <span class="item-total"> = {{ item.lineItemTotal | currency }}</span>
+                    </div>
+                </div>
+                <mat-action-row class="order-actions">
+                    <button (click)="reOrder(order)" mat-fab extended color="primary">
+                        <mat-icon>add_shopping_cart</mat-icon>
+                        Reorder
+                    </button>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </mat-accordion>
+    }
+</div>
